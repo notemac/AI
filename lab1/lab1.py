@@ -48,14 +48,30 @@ def Expand(node):
 
 # Поиск в графе целевого состояния
 def GraphSearch():
-  init_state = [[1,0,0,1], 
-                [0,0,0,0],
-                [0,0,0,0],
-                [1,0,0,1]]
+  init_state = [[1,0,0,0], 
+                [0,1,0,0],
+                [0,0,1,0],
+                [0,0,0,1]]
   target_state=[[0,0,0,0], 
                 [0,0,0,0],
                 [0,0,0,0],
                 [0,0,0,0]] 
+  #init_state = [[1,1,1,1], 
+  #              [1,0,0,1],
+  #              [1,0,0,1],
+  #              [1,1,1,1]]
+  #target_state=[[0,0,0,0], 
+  #              [0,0,0,0],
+  #              [0,0,0,0],
+  #              [0,0,0,0]] 
+  #init_state = [[1,0,0,1], 
+  #              [0,0,0,0],
+  #              [0,0,0,0],
+  #              [1,0,0,1]]
+  #target_state=[[0,0,0,0], 
+  #              [0,0,0,0],
+  #              [0,0,0,0],
+  #              [0,0,0,0]] 
   #init_state = [[0,0,0,0], 
   #              [0,0,0,0],
   #              [0,0,0,0],
@@ -77,6 +93,9 @@ def GraphSearch():
     if target_hash == hash(str(node.state)):
       PrintPath(node, time.clock() - start_time)
       return 'Success'
+    # Желаемая глубина поиска
+    if node.depth == 6:
+      continue
     if str(node.state) not in closed:
       closed.add(str(node.state))
       fringe += Expand(node)
